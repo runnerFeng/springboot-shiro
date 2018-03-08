@@ -21,14 +21,13 @@ public class LoginController {
         System.out.println(username);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         SecurityUtils.getSubject().login(token);
-
         return "loginSuccess";
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String home() {
         Subject subject = SecurityUtils.getSubject();
-        User principal = (User) subject.getPrincipal();
-        return "Home";
+        User user = (User) subject.getPrincipal();
+        return user.getUsername();
     }
 }
